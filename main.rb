@@ -1,4 +1,4 @@
-#playable mastermind game
+# playable mastermind game
 class Mastermind
     # def randomNumber
     #     array = Array.new(20)
@@ -8,6 +8,10 @@ class Mastermind
     #     end
     #     p array
     # end
+
+    attr_accessor :gameMode, :rounds, :currentRound, :turnNumber, :currentCode,
+                  :playerPoints, :cpuPoints, :playerScore, :cpuScore
+
     def initialize 
         @gameMode = ""
         @rounds = ""
@@ -20,6 +24,29 @@ class Mastermind
         @cpuScore = 0
     end
 
+    # asks uses how many rounds they want to play
+    def roundsAmount
+        puts "How many rounds would you like to play?"
+        begin
+            input = Integer(gets.chomp)
+        rescue ArgumentError
+            puts "Oops, invalid input. Please type how many rounds you want to play \nusing the number keys"
+            roundsAmount()
+        end
+    end
+    # game mode where player guesses the cpu created code
+    def codeBreaker
+    end
+
+    # game mode where cpu guesses the player created code
+    def codeMaker
+    end
+
+    def roundsTest
+        puts @rounds
+        roundsAmount()
+        puts @rounds
+    end
 
 
 
@@ -34,3 +61,5 @@ brokenCheck()
 
 currentGame = Mastermind.new
 # currentGame.randomNumber()
+currentGame.roundsAmount()
+# currentGame.roundsTest()
