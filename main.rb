@@ -13,8 +13,8 @@ class Mastermind
                   :playerPoints, :cpuPoints, :playerScore, :cpuScore
 
     def initialize 
-        @gameMode = ""
-        @rounds = ""
+        @gameMode = "maker/breaker"
+        @rounds = 1
         @currentRound = 0
         @turnNumber = 0
         @currentCode = []
@@ -28,10 +28,26 @@ class Mastermind
     def roundsAmount
         puts "How many rounds would you like to play?"
         begin
-            input = Integer(gets.chomp)
+            @rounds = Integer(gets.chomp)
         rescue ArgumentError
             puts "Oops, invalid input. Please type how many rounds you want to play \nusing the number keys"
             roundsAmount()
+        end
+    end
+
+    def chooseMode
+        puts "Please choose the mode you start in."
+        puts "(M) Start as Code Maker? or (B) Start as Code Breaker?"
+        input = gets.chomp
+        if input == "M" || input == "B"
+            if input == "M"
+                @gameMode = "maker"
+            else 
+                @gameMode = "breaker"
+            end
+        else 
+            puts "Invalid input, please type M to start as Code Maker \nor type B to start as Code Breaker"
+            chooseMode()
         end
     end
     # game mode where player guesses the cpu created code
@@ -61,5 +77,6 @@ brokenCheck()
 
 currentGame = Mastermind.new
 # currentGame.randomNumber()
-currentGame.roundsAmount()
+# currentGame.roundsAmount()
 # currentGame.roundsTest()
+currentGame.chooseMode()
