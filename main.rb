@@ -13,10 +13,10 @@ class Mastermind
                   :playerPoints, :cpuPoints, :playerScore, :cpuScore
 
     def initialize 
-        @gameMode = "maker/breaker"
+        @gameMode = "breaker"
         @rounds = 1
-        @currentRound = 0
-        @turnNumber = 0
+        @currentRound = 1
+        @turnNumber = 1
         @currentCode = []
         @playerPoints = 0
         @cpuPoints = 0
@@ -24,7 +24,7 @@ class Mastermind
         @cpuScore = 0
     end
 
-    # asks uses how many rounds they want to play
+    # asks uses how many rounds userr wants to play and verifies input is integer
     def roundsAmount
         puts "How many rounds would you like to play?"
         begin
@@ -34,6 +34,7 @@ class Mastermind
             roundsAmount()
         end
     end
+
 
     def chooseMode
         puts "Please choose the mode you start in."
@@ -50,6 +51,40 @@ class Mastermind
             chooseMode()
         end
     end
+
+    def codeValidator(input)
+        # begin
+        #     Integer(input)
+        # rescue ArgumentError
+        #     puts "Oops, invalid input. Enter a 4 digit code of numbers between 1 and 6. Ex: 1634"
+        #     chooseCode()
+        # end
+        input = input.split("")
+        if input.length == 4 && input.all? { |digit| (digit.to_i >= 1) && (digit.to_i <= 6) }
+            @currentCode = input
+        else 
+            puts "Looks like your code was more than 4 digits or some digits were not between 1 and 6! \nLets try again."
+            chooseCode()
+        end
+
+    end
+
+
+    def chooseCode
+        puts "enter the code below"
+        input = gets.chomp
+        codeValidator(input)
+        puts "second"
+        p @currentCode
+    end
+
+    def createCode
+        puts "first"
+        p @currentCode
+        puts "Time to make the code! Enter a 4 digit code of numbers between 1 and 6."
+        chooseCode()
+    end
+
     # game mode where player guesses the cpu created code
     def codeBreaker
     end
@@ -69,6 +104,8 @@ class Mastermind
 
 
 end
+
+
 def brokenCheck()
     puts "Haven't broken it yet :)"
 end
@@ -79,4 +116,7 @@ currentGame = Mastermind.new
 # currentGame.randomNumber()
 # currentGame.roundsAmount()
 # currentGame.roundsTest()
-currentGame.chooseMode()
+# currentGame.chooseMode()
+# currentGame.chooseCode()
+currentGame.createCode()
+
