@@ -52,13 +52,15 @@ class Mastermind
         end
     end
 
+
+
+
+
+
+
+# #########    CODE MAKER METHODS BELOW    ##########
+
     def codeValidator(input)
-        # begin
-        #     Integer(input)
-        # rescue ArgumentError
-        #     puts "Oops, invalid input. Enter a 4 digit code of numbers between 1 and 6. Ex: 1634"
-        #     chooseCode()
-        # end
         input = input.split("")
         if input.length == 4 && input.all? { |digit| (digit.to_i >= 1) && (digit.to_i <= 6) }
             @currentCode = input
@@ -66,7 +68,6 @@ class Mastermind
             puts "Looks like your code was more than 4 digits or some digits were not between 1 and 6! \nLets try again."
             chooseCode()
         end
-
     end
 
 
@@ -84,6 +85,21 @@ class Mastermind
         puts "Time to make the code! Enter a 4 digit code of numbers between 1 and 6."
         chooseCode()
     end
+
+
+
+
+
+
+
+# #########    CODE BREAKER METHODS BELOW    ##########
+
+
+    def cpuCreateCode
+        @currentCode = Array.new(4) { rand(1..6) }
+    end
+
+
 
     # game mode where player guesses the cpu created code
     def codeBreaker
@@ -118,5 +134,13 @@ currentGame = Mastermind.new
 # currentGame.roundsTest()
 # currentGame.chooseMode()
 # currentGame.chooseCode()
-currentGame.createCode()
+# currentGame.createCode()
+currentGame.cpuCreateCode()
+currentGame.cpuCreateCode()
+currentGame.cpuCreateCode()
+currentGame.cpuCreateCode()
+currentGame.cpuCreateCode()
+currentGame.cpuCreateCode()
+currentGame.cpuCreateCode()
+currentGame.cpuCreateCode()
 
