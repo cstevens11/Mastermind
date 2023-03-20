@@ -10,7 +10,7 @@ class Mastermind
     # end
 
     attr_accessor :gameMode, :rounds, :currentRound, :turnNumber, :currentCode,
-                  :playerPoints, :cpuPoints, :playerScore, :cpuScore
+                  :currentGuess, :playerPoints, :cpuPoints, :playerScore, :cpuScore
 
     def initialize 
         @gameMode = "breaker"
@@ -18,6 +18,7 @@ class Mastermind
         @currentRound = 1
         @turnNumber = 1
         @currentCode = []
+        @currentGuess = []
         @playerPoints = 0
         @cpuPoints = 0
         @playerScore = 0
@@ -94,9 +95,30 @@ class Mastermind
 
 # #########    CODE BREAKER METHODS BELOW    ##########
 
-
+# cpu creates random code for player to break
     def cpuCreateCode
         @currentCode = Array.new(4) { rand(1..6) }
+    end
+
+    def guessCode
+        if @turnNumber < 12
+            puts "Time for guess ##{@turnNumber}. Choose wisely, you have #{(13 - @turnNumber)} guesses left."
+        else
+            puts "Time for your last attempt at breaking the code. Good luck."
+        end
+        guess = gets.chomp.split("")
+        p guess
+        until guess.length == 4 && guess.all? { |digit| (digit.to_i >= 1) && (digit.to_i <= 6) } do 
+            puts "Invalid code, please enter your code breaking attempt."
+            guess = gets.chomp.split("")
+        end
+        @currentGuess = guess
+        p "current guess updated to #{@currentGuess}"
+
+
+         
+
+
     end
 
 
@@ -135,12 +157,5 @@ currentGame = Mastermind.new
 # currentGame.chooseMode()
 # currentGame.chooseCode()
 # currentGame.createCode()
-currentGame.cpuCreateCode()
-currentGame.cpuCreateCode()
-currentGame.cpuCreateCode()
-currentGame.cpuCreateCode()
-currentGame.cpuCreateCode()
-currentGame.cpuCreateCode()
-currentGame.cpuCreateCode()
-currentGame.cpuCreateCode()
-
+# currentGame.cpuCreateCode()
+currentGame.guessCode()
