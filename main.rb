@@ -114,13 +114,30 @@ class Mastermind
         end
         @currentGuess = guess
         p "current guess updated to #{@currentGuess}"
-
-
-         
-
-
     end
 
+
+    def attemptBreak
+        matches = 0
+        mismatches = 0
+        if @currentCode == @currentGuess
+            puts "Congrats, you have broken the code"
+        else
+            @currentGuess.each_with_index do |gdigit, gindex|
+                @currentCode.each_with_index do |cdigit, cindex|
+                    if gdigit == cdigit && gindex == cindex 
+                        matches += 1
+                    elsif gdigit == cdigit 
+                        mismatches += 1
+                    end
+                end
+            end       
+            puts "you have #{matches} digits in the correct position and #{mismatches} digits in the incorrect position"
+        end
+    end
+
+
+            
 
 
     # game mode where player guesses the cpu created code
@@ -158,4 +175,5 @@ currentGame = Mastermind.new
 # currentGame.chooseCode()
 # currentGame.createCode()
 # currentGame.cpuCreateCode()
-currentGame.guessCode()
+# currentGame.guessCode()
+currentGame.attemptBreak()
