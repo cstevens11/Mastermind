@@ -10,19 +10,20 @@ class Mastermind
     # end
 
     attr_accessor :gameMode, :rounds, :currentRound, :turnNumber, :currentCode,
-                  :currentGuess, :playerPoints, :cpuPoints, :playerScore, :cpuScore
+                  :currentGuess, :playerPoints, :cpuPoints, :playerScore, :cpuScore, :winner
 
     def initialize 
         @gameMode = "breaker"
         @rounds = 1
         @currentRound = 1
-        @turnNumber = 1
+        @turnNumber = 0
         @currentCode = []
         @currentGuess = []
         @playerPoints = 0
         @cpuPoints = 0
         @playerScore = 0
         @cpuScore = 0
+        @winner = false
     end
 
     # asks uses how many rounds userr wants to play and verifies input is integer
@@ -97,7 +98,10 @@ class Mastermind
 
 # cpu creates random code for player to break
     def cpuCreateCode
-        @currentCode = Array.new(4) { rand(1..6) }
+        puts "The cpu has thought hard and created a code. Your attempts at guessing it may begin."
+        # @currentCode = Array.new(4) { rand(1..6) }
+        @currentCode = [5,5,6,6]
+        p "shhhhh the code is #{@currentCode}"
     end
 
     def guessCode
@@ -107,10 +111,12 @@ class Mastermind
             puts "Time for your last attempt at breaking the code. Good luck."
         end
         guess = gets.chomp.split("")
+        guess = guess.map { |str| str.to_i }
         p guess
         until guess.length == 4 && guess.all? { |digit| (digit.to_i >= 1) && (digit.to_i <= 6) } do 
             puts "Invalid code, please enter your code breaking attempt."
             guess = gets.chomp.split("")
+            guess = guess.map { |str| str.to_i }
         end
         @currentGuess = guess
         p "current guess updated to #{@currentGuess}"
@@ -118,17 +124,31 @@ class Mastermind
 
 
     def attemptBreak
+        tempCode = @currentCode
+        tempGuess = @currentGuess
         matches = 0
         mismatches = 0
         if @currentCode == @currentGuess
             puts "Congrats, you have broken the code"
+            @winner = true
         else
-            @currentGuess.each_with_index do |gdigit, gindex|
-                @currentCode.each_with_index do |cdigit, cindex|
-                    if gdigit == cdigit && gindex == cindex 
+            tempGuess.each_with_index do |gdigit, gindex|
+                tempCode.each_with_index do |cdigit, cindex|
+                    if gdigit == cdigit && gindex == cindex
                         matches += 1
-                    elsif gdigit == cdigit 
-                        mismatches += 1
+                        tempGuess[gindex] = 0
+                        p "matches just changed temp code to #{tempCode}"
+                        break
+                    end
+                end
+            end
+            tempGuess.each_with_index do |gdigit, gindex|
+                tempCode.each do |cdigit|
+                    if cdigit != 0 && gdigit == cdigit 
+                        mismatches += 1 
+                        tempGuess[gindex] = 0
+                        p "mismatches just changed temp code to #{tempCode} and #{tempGuess} is tempguess"
+                        break
                     end
                 end
             end       
@@ -141,7 +161,13 @@ class Mastermind
 
 
     # game mode where player guesses the cpu created code
-    def codeBreaker
+    def playCodeBreaker
+        cpuCreateCode()
+        until @turnNumber == 12 || @winner == true do 
+            @turnNumber += 1
+            guessCode()
+            attemptBreak()
+        end
     end
 
     # game mode where cpu guesses the player created code
@@ -176,4 +202,11 @@ currentGame = Mastermind.new
 # currentGame.createCode()
 # currentGame.cpuCreateCode()
 # currentGame.guessCode()
-currentGame.attemptBreak()
+# currentGame.attemptBreak()
+currentGame.playCodeBreaker()
+# currentGame.
+# currentGame.
+# currentGame.
+# currentGame.
+# currentGame.
+# currentGame.
