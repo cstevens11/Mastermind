@@ -130,6 +130,8 @@ class Mastermind
         mismatches = 0
         if @currentCode == @currentGuess
             puts "Congrats, you have broken the code"
+            @cpuScore += (@turnNumber - 1)
+            puts "cpu Score is #{@cpuScore}"
             @winner = true
         else
             tempGuess.each_with_index do |gdigit, gindex|
@@ -144,7 +146,7 @@ class Mastermind
             end
             tempGuess.each_with_index do |gdigit, gindex|
                 tempCode.each do |cdigit|
-                    if cdigit != 0 && gdigit == cdigit 
+                    if gdigit == cdigit 
                         mismatches += 1 
                         tempGuess[gindex] = 0
                         p "mismatches just changed temp code to #{tempCode} and #{tempGuess} is tempguess"
@@ -152,7 +154,7 @@ class Mastermind
                     end
                 end
             end       
-            puts "you have #{matches} digits in the correct position and #{mismatches} digits in the incorrect position"
+            puts "you have #{matches} digits in the correct position and #{mismatches} digits in the incorrect position, turn number is #{@turnNumber}"
         end
     end
 
@@ -162,11 +164,13 @@ class Mastermind
 
     # game mode where player guesses the cpu created code
     def playCodeBreaker
+        @winner = false
         cpuCreateCode()
         until @turnNumber == 12 || @winner == true do 
             @turnNumber += 1
             guessCode()
             attemptBreak()
+
         end
     end
 
