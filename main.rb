@@ -99,9 +99,9 @@ class Mastermind
 # cpu creates random code for player to break
     def cpuCreateCode
         puts "The cpu has thought hard and created a code. Your attempts at guessing it may begin."
-        # @currentCode = Array.new(4) { rand(1..6) }
-        @currentCode = [1,1,2,3]
-        p "shhhhh the code is #{@currentCode}"
+        @currentCode = Array.new(4) { rand(1..6) }
+        # @currentCode = [1,1,1,1]
+        # p "shhhhh the code is #{@currentCode}"
     end
 
     def guessCode
@@ -141,13 +141,13 @@ class Mastermind
                         matches += 1
                         tempGuess[gindex] = 0
                         tempCode[cindex] = 0
-                        puts "current code #{@currentCode} current guess #{@currentGuess}"
-                        p "(in function)matches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
+                        # puts "current code #{@currentCode} current guess #{@currentGuess}"
+                        # p "(in function)matches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
                         break
                     end
                 end
             end
-            p "(put function ) temp code to #{tempCode} and temp guess to #{tempGuess}"
+            # p "(out function ) temp code to #{tempCode} and temp guess to #{tempGuess}"
 
             tempGuess.each_with_index do |gdigit, gindex|
                 tempCode.each_with_index do |cdigit, cindex|
@@ -155,8 +155,8 @@ class Mastermind
                         mismatches += 1 
                         tempGuess[gindex] = 0
                         tempCode[cindex] = 0
-                        puts "current code #{@currentCode} current guess #{@currentGuess}"
-                        p "mismatches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
+                        # puts "current code #{@currentCode} current guess #{@currentGuess}"
+                        # p "mismatches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
                         break
                     end
                 end
