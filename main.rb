@@ -100,7 +100,7 @@ class Mastermind
     def cpuCreateCode
         puts "The cpu has thought hard and created a code. Your attempts at guessing it may begin."
         # @currentCode = Array.new(4) { rand(1..6) }
-        @currentCode = [5,5,6,6]
+        @currentCode = [1,1,2,3]
         p "shhhhh the code is #{@currentCode}"
     end
 
@@ -124,8 +124,9 @@ class Mastermind
 
 
     def attemptBreak
-        tempCode = @currentCode
-        tempGuess = @currentGuess
+        puts "should refresh"
+        tempCode = @currentCode.clone
+        tempGuess = @currentGuess.clone
         matches = 0
         mismatches = 0
         if @currentCode == @currentGuess
@@ -139,21 +140,28 @@ class Mastermind
                     if gdigit == cdigit && gindex == cindex
                         matches += 1
                         tempGuess[gindex] = 0
-                        p "matches just changed temp code to #{tempCode}"
+                        tempCode[cindex] = 0
+                        puts "current code #{@currentCode} current guess #{@currentGuess}"
+                        p "(in function)matches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
                         break
                     end
                 end
             end
+            p "(put function ) temp code to #{tempCode} and temp guess to #{tempGuess}"
+
             tempGuess.each_with_index do |gdigit, gindex|
-                tempCode.each do |cdigit|
-                    if gdigit == cdigit 
+                tempCode.each_with_index do |cdigit, cindex|
+                    if  cdigit != 0 && gdigit == cdigit 
                         mismatches += 1 
                         tempGuess[gindex] = 0
-                        p "mismatches just changed temp code to #{tempCode} and #{tempGuess} is tempguess"
+                        tempCode[cindex] = 0
+                        puts "current code #{@currentCode} current guess #{@currentGuess}"
+                        p "mismatches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
                         break
                     end
                 end
             end       
+
             puts "you have #{matches} digits in the correct position and #{mismatches} digits in the incorrect position, turn number is #{@turnNumber}"
         end
     end
@@ -170,9 +178,10 @@ class Mastermind
             @turnNumber += 1
             guessCode()
             attemptBreak()
-
         end
     end
+
+
 
     # game mode where cpu guesses the player created code
     def codeMaker
