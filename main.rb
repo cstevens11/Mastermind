@@ -1,13 +1,5 @@
 # playable mastermind game
 class Mastermind
-    # def randomNumber
-    #     array = Array.new(20)
-    #     # p array
-    #     array.each_with_index do |cell, index|
-    #         array[index] = rand(1..6)
-    #     end
-    #     p array
-    # end
 
     attr_accessor :gameMode, :rounds, :currentRound, :turnNumber, :currentCode,
                   :currentGuess, :playerPoints, :cpuPoints, :playerScore, :cpuScore, :winner
@@ -26,7 +18,7 @@ class Mastermind
         @winner = false
     end
 
-    # asks uses how many rounds userr wants to play and verifies input is integer
+    # asks user how many rounds userr wants to play and verifies input is integer
     def roundsAmount
         puts "How many rounds would you like to play?"
         begin
@@ -54,12 +46,6 @@ class Mastermind
         end
     end
 
-
-
-
-
-
-
 # #########    CODE MAKER METHODS BELOW    ##########
 
     def codeValidator(input)
@@ -71,7 +57,6 @@ class Mastermind
             chooseCode()
         end
     end
-
 
     def chooseCode
         puts "enter the code below"
@@ -87,12 +72,6 @@ class Mastermind
         puts "Time to make the code! Enter a 4 digit code of numbers between 1 and 6."
         chooseCode()
     end
-
-
-
-
-
-
 
 # #########    CODE BREAKER METHODS BELOW    ##########
 
@@ -122,9 +101,7 @@ class Mastermind
         p "current guess updated to #{@currentGuess}"
     end
 
-
     def attemptBreak
-        # puts "should refresh"
         tempCode = @currentCode.clone
         tempGuess = @currentGuess.clone
         matches = 0
@@ -142,12 +119,11 @@ class Mastermind
                         tempGuess[gindex] = 0
                         tempCode[cindex] = 0
                         # puts "current code #{@currentCode} current guess #{@currentGuess}"
-                        # p "(in function)matches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
+                        # puts "matches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
                         break
                     end
                 end
             end
-            # p "(out function ) temp code to #{tempCode} and temp guess to #{tempGuess}"
 
             tempGuess.each_with_index do |gdigit, gindex|
                 tempCode.each_with_index do |cdigit, cindex|
@@ -156,19 +132,14 @@ class Mastermind
                         tempGuess[gindex] = 0
                         tempCode[cindex] = 0
                         # puts "current code #{@currentCode} current guess #{@currentGuess}"
-                        # p "mismatches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
+                        # puts "mismatches just changed temp code to #{tempCode} and temp guess to #{tempGuess}"
                         break
                     end
                 end
-            end       
-
+            end
             puts "you have #{matches} digits in the correct position and #{mismatches} digits in the incorrect position, turn number is #{@turnNumber}"
         end
     end
-
-
-            
-
 
     # game mode where player guesses the cpu created code
     def playCodeBreaker
@@ -181,37 +152,28 @@ class Mastermind
         end
     end
 
-
-
     # game mode where cpu guesses the player created code
     def codeMaker
-
     end
     def cpuGuess
-
     end
 
-    def roundsTest
-        puts @rounds
-        roundsAmount()
-        puts @rounds
-    end
-
-
-
-
-
+    # def roundsTest
+    #     puts @rounds
+    #     roundsAmount()
+    #     puts @rounds
+    # end
 end
 
 
-def brokenCheck()
-    # puts "Haven't broken it yet :)"
-end
+# def brokenCheck()
+#     puts "Haven't broken it yet :)"
+# end
 
-brokenCheck()
+# brokenCheck()
 
 currentGame = Mastermind.new
-# currentGame.randomNumber()
+currentGame.codeMaker()
 # currentGame.roundsAmount()
 # currentGame.roundsTest()
 # currentGame.chooseMode()
@@ -221,9 +183,4 @@ currentGame = Mastermind.new
 # currentGame.guessCode()
 # currentGame.attemptBreak()
 # currentGame.playCodeBreaker()
-currentGame.codeMaker()
-# currentGame.
-# currentGame.
-# currentGame.
-# currentGame.
-# currentGame.
+
