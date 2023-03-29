@@ -9,7 +9,7 @@ class Mastermind
         @rounds = 1
         @currentRound = 1
         @turnNumber = 0
-        @currentCode = [1,1,1,1]
+        @currentCode = []
         @currentGuess = []
         @playerPoints = 0
         @cpuPoints = 0
