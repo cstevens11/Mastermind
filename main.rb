@@ -63,11 +63,11 @@ class Mastermind
         input = gets.chomp
         codeValidator(input)
         puts "second"
-        p @currentCode
+        # p @currentCode
     end
 
     def createCode
-        puts "first"
+        # puts "first"
         p @currentCode
         puts "Time to make the code! Enter a 4 digit code of numbers between 1 and 6."
         chooseCode()
@@ -149,6 +149,11 @@ class Mastermind
             @turnNumber += 1
             guessCode()
             attemptBreak()
+            if @turnNumber == 12 && @winner == false
+                puts "-------------------------------------------
+You have failed as a codebreaker, better luck next time.
+-------------------------------------------"
+            end
         end
     end
 
