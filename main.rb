@@ -165,7 +165,18 @@ class Mastermind
     # end
 end
 
-
+def rules 
+    puts "----------------Rules!----------------
+    When started, the computer will create a 4 digit code.
+    The code will only contain the numbers 1-6.
+    Try to guess in as few moves as possible!
+    
+    After guessing, you will be shown how many digits you have in the correct position,
+    as well as how many correct digits you have in the incorrect position.
+    
+    Good Luck!    
+--------------------------------------"
+end
 # def brokenCheck()
 #     puts "Haven't broken it yet :)"
 # end
@@ -173,7 +184,6 @@ end
 # brokenCheck()
 
 currentGame = Mastermind.new
-currentGame.codeMaker()
 # currentGame.roundsAmount()
 # currentGame.roundsTest()
 # currentGame.chooseMode()
@@ -182,5 +192,7 @@ currentGame.codeMaker()
 # currentGame.cpuCreateCode()
 # currentGame.guessCode()
 # currentGame.attemptBreak()
-# currentGame.playCodeBreaker()
+rules()
+currentGame.playCodeBreaker()
+# currentGame.codeMaker()
 
