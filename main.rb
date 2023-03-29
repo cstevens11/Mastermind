@@ -98,7 +98,7 @@ class Mastermind
             guess = guess.map { |str| str.to_i }
         end
         @currentGuess = guess
-        p "current guess updated to #{@currentGuess}"
+        # p "current guess updated to #{@currentGuess}"
     end
 
     def attemptBreak
