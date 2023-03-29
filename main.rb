@@ -17,7 +17,7 @@ class Mastermind
         @rounds = 1
         @currentRound = 1
         @turnNumber = 0
-        @currentCode = []
+        @currentCode = [1,1,1,1]
         @currentGuess = []
         @playerPoints = 0
         @cpuPoints = 0
@@ -124,7 +124,7 @@ class Mastermind
 
 
     def attemptBreak
-        puts "should refresh"
+        # puts "should refresh"
         tempCode = @currentCode.clone
         tempGuess = @currentGuess.clone
         matches = 0
@@ -185,6 +185,10 @@ class Mastermind
 
     # game mode where cpu guesses the player created code
     def codeMaker
+
+    end
+    def cpuGuess
+
     end
 
     def roundsTest
@@ -201,7 +205,7 @@ end
 
 
 def brokenCheck()
-    puts "Haven't broken it yet :)"
+    # puts "Haven't broken it yet :)"
 end
 
 brokenCheck()
@@ -216,8 +220,8 @@ currentGame = Mastermind.new
 # currentGame.cpuCreateCode()
 # currentGame.guessCode()
 # currentGame.attemptBreak()
-currentGame.playCodeBreaker()
-# currentGame.
+# currentGame.playCodeBreaker()
+currentGame.codeMaker()
 # currentGame.
 # currentGame.
 # currentGame.
